@@ -1,0 +1,34 @@
+{
+  "name": "routines",
+  "version": "1.0.0",
+  "description": "This app will allow club admin to create and edit routines. Once this routine is created, it will be pushed to Firebase. There are mobile apps connected to this instance of Firebase. Once the routine is pushed it can be pulled by Netpulse mobile app and display it for the user to start working out with.",
+  "main": "index.js",
+  "dependencies": {
+    "compass": "^0.1.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-htmlhint": "^0.3.1",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshinishchal/routinesForm.git"
+  },
+  "author": "Nishchal A. Joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshinishchal/routinesForm/issues"
+  },
+  "homepage": "https://github.com/joshinishchal/routinesForm#readme"
+}
