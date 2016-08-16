@@ -1,3 +1,6 @@
+require "normalize-scss"
+require "compass/import-once/activate"
+
 project_type = :stand_alone
 http_path = "./app"
 css_dir = "css"
