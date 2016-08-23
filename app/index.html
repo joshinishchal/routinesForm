@@ -17,33 +17,75 @@
     <p>Logout</p>
 </header>
 <section>
-        <header>
+        <header class="">
             <p>Hellp, Planet Fitness Admin. Setting up a routine is easy. Let's get started!</p>
         </header>
 
-        <label for="routineTitle">Routine Title<sup>*</sup></label>
-        <p><input type="text" id="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays"></p>
+        <div class="form-group">
+            <label for="routineTitle">Routine Title<sup>*</sup></label>
+            <input type="text" id="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays" class="form-control">
+        </div>
 
-        <label for="description">Description<sup>*</sup></label>
-        <p><textarea id="description" data-ng-model="description" placeholder="Write here something about this routine." rows="4" cols="50"></textarea></p>
+        <div class="form-group">
+            <label for="description">Description<sup>*</sup></label>
+            <textarea id="description"  data-ng-model="description" placeholder="Write here something about this routine." rows="4" cols="50" class="form-control"></textarea>
+        </div>
 
-        <label>Unit of Measure<sup>*</sup></label>
+        <div class="form-group">
+            <label>Unit of Measure<sup>*</sup></label>
+            <div class="form-inline">
+                <input type="radio" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
+            <input class="form-control radio" type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
+            </div>
+        </div>
+
         <p>
-            <input type="radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
-            <input type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
+            <p class="pull-left">Exercises</p>
+            <button data-ng-click="addExercise" class="pull-right btn btn-success">ADD NEW EXERCISES</button>
         </p>
 
-        <p>
-            <span>Exercises</span>
-            <span data-ng-click="addExercise">ADD NEW EXERCISES</span>
-        </p>
         <div id="exercises">
+            <div class="form-group">
+                <div class="form-inline">
+                    <div class="input-group">
+                        <input class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-bind="exerciseType" required>
+                        <input class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-bind="exerciseName" required>
+                        <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required>
+                        <span class="input-group-addon">HH:MM</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" required>
+                        <span class="input-group-addon">Mi</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="restTime" class="sr-only">Rest Time(Optional)</label>
+                        <span class="input-group-addon">Rest Time(Optional)</span>
+                        <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
+                        <span class="input-group-addon">MM:SS</span>
+                    </div>
+                    <div class="input-group">
+                        <button class="input-group" type="button" id="deleteExercise" name="deleteExercise">Delete</button>
+                    </div>
+                </div>
+                <datalist id="exerciseTypes">
+                    <option value=""></option>
+                </datalist>
+                <datalist id="exerciseNames">
+                    <option value=""></option>
+                </datalist>
+                <datalist id="setTypes">
+                    <option value=""></option>
+                </datalist>
 
+            </div>
         </div>
 
         <footer>
             <p>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</p>
-            <button type="submit" data-ng-click="publish" class="btn btn-success">Publish</button>
+            <button type="submit" data-ng-click="publish" class="btn btn-primary">Publish</button>
         </footer>
 </section>
 <footer>
