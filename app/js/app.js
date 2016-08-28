@@ -28,6 +28,33 @@ routinesApp.service("fbConnection", ["rootNode", "rootRef", "$firebaseArray", "$
 }]);
 
 routinesApp.service("routinesHelper", [function routinesHelper(){
+    var exerciserNameList = {};
+    function createExerciseNameList(obj){
+        if(!obj["cardio"]){
+            return;
+        }
+        for(var i in obj){
+            if(i.indexOf("$") < 0 && i.indexOf("_proto_") < 0 && !exerciserNameList[i]){
+                exerciserNameList[i] = {};
+            }
+            if(i.indexOf("$") < 0 && i.indexOf("_proto_") < 0 && typeof obj[i] === "object"){
+                for(var j in obj[i]){
+                    if(typeof obj[i][j] === "object"){
+                        for(var k in obj[i][j]){
+                            exerciserNameList[i][obj[i][j][k]["name"]] = [i,j,k];
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    this.getExerciserNameList = function(exerciseType, obj){
+        if(JSON.stringify(exerciserNameList) == "{}"){
+            createExerciseNameList(obj);
+        }
+        return exerciserNameList[exerciseType];
+    };
 
 }]);
 
@@ -39,8 +66,9 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
         "exerciseCategories" : fbConnection.getExerciseCategories()
     };
 
+    $scope.getExerciserNameList = routinesHelper.getExerciserNameList;
+
     $scope.fbExerciseData = fbExerciseData;
-    $scope.exerciseCategories = fbExerciseData.getExerciseCategories;
 
 }]);
 

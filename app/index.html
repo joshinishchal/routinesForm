@@ -71,10 +71,10 @@
                     </div>
                 </div>
                 <datalist id="exerciseTypes">
-                    <option data-ng-repeat="(exerciseType, exercise) in fbExerciseData['exerciseType']" value="{{exerciseType}}"></option>
+                    <option data-ng-repeat="(exerciseType, exercise) in fbExerciseData['exerciseType']" value="{{fbExerciseData['exerciseCategories'][exerciseType]['name']}}"></option>
                 </datalist>
                 <datalist id="exerciseNames">
-                    <option data-ng-repeat="(exerciseName, subName) in fbExerciseData.exerciseType[selectedExerciseType]" value="{{exerciseName}}"></option>
+                    <option data-ng-repeat="(exerciseName, subName) in getExerciserNameList(selectedExerciseType.toLowerCase(), fbExerciseData['exerciseType'])" value="{{exerciseName}}"></option>
                 </datalist>
                 <datalist id="setTypes">
                     <option value=""></option>
