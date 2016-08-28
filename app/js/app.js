@@ -56,7 +56,11 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                             };
 
                             for(var m in obj[i][j]["attributes"]["groups"]){
-                                    var str = setDictionary[obj[i][j]["attributes"]["groups"][m]["attr0"]] + " & " + setDictionary[obj[i][j]["attributes"]["groups"][m]["attr1"]];
+                                    var tempArr = [];
+                                    for(var n in obj[i][j]["attributes"]["groups"][m]){
+                                        tempArr.push(setDictionary[obj[i][j]["attributes"]["groups"][m][n]]);
+                                    }
+                                    var str = tempArr.join(" & ");
                                     exerciserNameList[i][obj[i][j]["name"]]["setType"][str] = obj[i][j]["attributes"]["groups"][m];
                             }
 
@@ -68,7 +72,13 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                 };
 
                                 for(var l in obj[i][j][k]["attributes"]["groups"]){
-                                    var str = setDictionary[obj[i][j][k]["attributes"]["groups"][l]["attr0"]] + " & " + setDictionary[obj[i][j][k]["attributes"]["groups"][l]["attr1"]];
+                                    var tempArr = [];
+
+                                    for(var o in obj[i][j][k]["attributes"]["groups"][l]){
+                                        tempArr.push(setDictionary[obj[i][j][k]["attributes"]["groups"][l][o]]);
+                                    }
+
+                                    var str = tempArr.join(" & ");
                                     exerciserNameList[i][obj[i][j][k]["name"]]["setType"][str] = obj[i][j][k]["attributes"]["groups"][l];
                                 }
                             }
