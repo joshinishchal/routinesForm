@@ -52,16 +52,16 @@
                         <input class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" required>
                         <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" required>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" data-ng-show="isDurationAvailable(fbExerciseData['exerciseType'], selectedExerciseName)">
                         <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required>
                         <span class="input-group-addon">HH:MM</span>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" data-ng-show="isDistanceAvailable(fbExerciseData['exerciseType'], selectedExerciseName)">
                         <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" required>
                         <span class="input-group-addon">Mi</span>
                     </div>
                     <div class="input-group">
-                        <label for="restTime" class="sr-only">Rest Time(Optional)</label>
+                        <label for="restTime" class="sr-only">Rest Time (Optional)</label>
                         <span class="input-group-addon">Rest Time(Optional)</span>
                         <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
                         <span class="input-group-addon">MM:SS</span>
@@ -77,7 +77,7 @@
                     <option data-ng-repeat="(exerciseName, subName) in getExerciserNameList(selectedExerciseType.toLowerCase(), fbExerciseData['exerciseType'])" value="{{exerciseName}}"></option>
                 </datalist>
                 <datalist id="setTypes">
-                    <option value=""></option>
+                    <option data-ng-repeat="(setType, attrs) in getSetType(selectedExerciseType.toLowerCase(), selectedExerciseName)" value="{{setType}}"></option>
                 </datalist>
 
             </div>
