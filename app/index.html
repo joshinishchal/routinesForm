@@ -50,13 +50,13 @@
                     <div class="input-group">
                         <input class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType" required>
                         <input class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" required>
-                        <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" required>
+                        <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}">
                     </div>
-                    <div class="input-group" data-ng-show="isDurationAvailable(fbExerciseData['exerciseType'], selectedExerciseName)">
+                    <div class="input-group" data-ng-show="isDurationAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
                         <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required>
                         <span class="input-group-addon">HH:MM</span>
                     </div>
-                    <div class="input-group" data-ng-show="isDistanceAvailable(fbExerciseData['exerciseType'], selectedExerciseName)">
+                    <div class="input-group" data-ng-show="isDistanceAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
                         <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" required>
                         <span class="input-group-addon">Mi</span>
                     </div>

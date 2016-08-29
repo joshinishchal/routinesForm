@@ -28,7 +28,7 @@ routinesApp.service("fbConnection", ["rootNode", "rootRef", "$firebaseArray", "$
 }]);
 
 routinesApp.service("routinesHelper", [function routinesHelper(){
-    var exerciserNameList = {};
+    exerciserNameList = {};
     var setDictionary = {
         "reps"      : "Reps",
         "duration"  : "Duration",
@@ -52,7 +52,8 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                         if(i == "classes"){
                             exerciserNameList[i][obj[i][j]["name"]] = {
                                     "path" : [i,j],
-                                    "setType" : {}
+                                    "setType" : {},
+                                    "totalSet" : 0
                             };
 
                             for(var m in obj[i][j]["attributes"]["groups"]){
@@ -62,13 +63,15 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                     }
                                     var str = tempArr.join(" & ");
                                     exerciserNameList[i][obj[i][j]["name"]]["setType"][str] = obj[i][j]["attributes"]["groups"][m];
+                                    exerciserNameList[i][obj[i][j]["name"]]["totalSet"]++;
                             }
 
                         }else{
                             for(var k in obj[i][j]){
                                 exerciserNameList[i][obj[i][j][k]["name"]] = {
                                     "path" : [i,j,k],
-                                    "setType" : {}
+                                    "setType" : {},
+                                    "totalSet" : 0
                                 };
 
                                 for(var l in obj[i][j][k]["attributes"]["groups"]){
@@ -80,6 +83,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 
                                     var str = tempArr.join(" & ");
                                     exerciserNameList[i][obj[i][j][k]["name"]]["setType"][str] = obj[i][j][k]["attributes"]["groups"][l];
+                                    exerciserNameList[i][obj[i][j][k]["name"]]["totalSet"]++;
                                 }
                             }
                         }
@@ -106,30 +110,59 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         return {};
     };
 
-    function checkAttribute(obj, exerciseName, str){
-        var arr = exerciserNameList[exerciseName];
-        var attrGroups = obj[arr[0]][arr[1]][arr[2]]["attributes"]["groups"];
+    function checkAttribute(exerciseType, exerciseName, selectedSetType, str){
         var flag = false;
-        for(var i in attrGroups){
-            if(i.indexOf("group") >= 0){
-                for(var j in attrGroups[i]){
-                    if(attrGroups[i][j] == str){
+        console.log("in checkAttribute");
+        console.log("exerciseType: " + exerciseType);
+        console.log("exerciseName: " + exerciseName);
+        console.log("selectedSetType: " + selectedSetType);
+        console.log("str: " + str);
+        if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined"){
+            if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1){
+                console.log("in first if, str: " + str);
+                for(var i in exerciserNameList[exerciseType][exerciseName]["setType"]){
+                    if(i.indexOf(" & ") >= 0){
+                        for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][i]){
+                            if(exerciserNameList[exerciseType][exerciseName]["setType"][i][j] == str){
+                                flag = true;
+                                return flag;
+                            }
+                        }
+                    }
+                }
+            }else if(typeof selectedSetType != "undefined"){
+                console.log("in else if, str: " + str);
+                for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType]){
+                    if(exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType][j] == str){
                         flag = true;
                         return flag;
                     }
                 }
             }
         }
-
         return flag;
     }
 
-    this.isDurationAvailable = function(obj, exerciseName){
-        return checkAttribute(obj, exerciseName, "duration");
+    this.isDurationAvailable = function(exerciseType, exerciseName, selectedSetType){
+        //return checkAttribute(obj, exerciseName, "duration");
+        var str = "duration";
+        console.log("in duration");
+        return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
+
     };
 
-    this.isDistanceAvailable = function(obj, exerciseName){
-        return checkAttribute(obj, exerciseName, "distance");
+    this.isDistanceAvailable = function(exerciseType, exerciseName, selectedSetType){
+        //return checkAttribute(obj, exerciseName, "distance");
+        var str = "distance";
+        return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
+    };
+
+    this.isSetTypeVisible = function(exerciseType, exerciseName){
+        var flag = false;
+        if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined" && exerciserNameList[exerciseType][exerciseName]["totalSet"] > 1){
+            flag = true;
+        }
+        return flag;
     };
 
 }]);
@@ -143,9 +176,10 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
     };
 
     $scope.getExerciserNameList = routinesHelper.getExerciserNameList;
-    //$scope.isDurationAvailable = routinesHelper.isDurationAvailable;
-    //$scope.isDistanceAvailable = routinesHelper.isDistanceAvailable;
+    $scope.isDurationAvailable = routinesHelper.isDurationAvailable;
+    $scope.isDistanceAvailable = routinesHelper.isDistanceAvailable;
     $scope.getSetType = routinesHelper.getSetType;
+    $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
 
     $scope.fbExerciseData = fbExerciseData;
 
