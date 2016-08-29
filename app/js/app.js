@@ -112,14 +112,8 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 
     function checkAttribute(exerciseType, exerciseName, selectedSetType, str){
         var flag = false;
-        console.log("in checkAttribute");
-        console.log("exerciseType: " + exerciseType);
-        console.log("exerciseName: " + exerciseName);
-        console.log("selectedSetType: " + selectedSetType);
-        console.log("str: " + str);
         if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined"){
             if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1){
-                console.log("in first if, str: " + str);
                 for(var i in exerciserNameList[exerciseType][exerciseName]["setType"]){
                     if(i.indexOf(" & ") >= 0){
                         for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][i]){
@@ -144,17 +138,34 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
     }
 
     this.isDurationAvailable = function(exerciseType, exerciseName, selectedSetType){
-        //return checkAttribute(obj, exerciseName, "duration");
         var str = "duration";
-        console.log("in duration");
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
 
     };
 
+    this.isDurationRequired = function(exerciseType, exerciseName, selectedSetType){
+        console.log("in duration required");
+        var str = "duration";
+        if(checkAttribute(exerciseType, exerciseName, selectedSetType, str)){
+            return "required";
+        }else{
+            return "";
+        }
+    };
+
     this.isDistanceAvailable = function(exerciseType, exerciseName, selectedSetType){
-        //return checkAttribute(obj, exerciseName, "distance");
         var str = "distance";
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
+    };
+
+    this.isDistanceRequired = function(exerciseType, exerciseName, selectedSetType){
+        console.log("in distance required");
+        var str = "distance";
+        if(checkAttribute(exerciseType, exerciseName, selectedSetType, str)){
+            return "required";
+        }else{
+            return "";
+        }
     };
 
     this.isSetTypeVisible = function(exerciseType, exerciseName){
@@ -177,7 +188,11 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
 
     $scope.getExerciserNameList = routinesHelper.getExerciserNameList;
     $scope.isDurationAvailable = routinesHelper.isDurationAvailable;
+    $scope.isDurationRequired = routinesHelper.isDurationRequired;
+
     $scope.isDistanceAvailable = routinesHelper.isDistanceAvailable;
+    $scope.isDistanceRequired = routinesHelper.isDistanceRequired;
+
     $scope.getSetType = routinesHelper.getSetType;
     $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
 

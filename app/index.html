@@ -53,11 +53,11 @@
                         <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}">
                     </div>
                     <div class="input-group" data-ng-show="isDurationAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
-                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required>
+                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" {{isDurationRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
                         <span class="input-group-addon">HH:MM</span>
                     </div>
                     <div class="input-group" data-ng-show="isDistanceAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
-                        <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" required>
+                        <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" {{isDistanceRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
                         <span class="input-group-addon">Mi</span>
                     </div>
                     <div class="input-group">
