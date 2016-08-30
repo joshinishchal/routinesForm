@@ -4,7 +4,9 @@
   "description": "This app will allow club admin to create and edit routines. Once this routine is created, it will be pushed to Firebase. There are mobile apps connected to this instance of Firebase. Once the routine is pushed it can be pulled by Netpulse mobile app and display it for the user to start working out with.",
   "main": "index.js",
   "dependencies": {
-    "compass": "^0.1.1"
+    "compass": "^0.1.1",
+    "gulp-cli": "^1.2.2",
+    "ruby": "^0.6.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

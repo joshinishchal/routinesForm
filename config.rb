@@ -1,4 +1,4 @@
-require "normalize-scss"
+#require "normalize-scss"
 require "compass/import-once/activate"
 
 project_type = :stand_alone
