@@ -47,40 +47,64 @@
 
         <div id="exercises">
             <div class="form-group">
-                <div class="form-inline">
-                    <div class="input-group">
-                        <input class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-bind="exerciseType" required>
-                        <input class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-bind="exerciseName" required>
-                        <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" required>
+            <!--//Exercise Starts-->
+                <div class="exercise">
+                    <!--//First line of form starts here-->
+                    <div class="form-inline">
+                        <div class="input-group">
+                            <input class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType" required>
+                            <input class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" required>
+                            <input class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}">
+                        </div>
+                        <div class="input-group" data-ng-show="isDurationAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
+                            <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" {{isDurationRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
+                            <span class="input-group-addon">HH:MM</span>
+                        </div>
+                        <div class="input-group" data-ng-show="isDistanceAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
+                            <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" {{isDistanceRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
+                            <span class="input-group-addon">Mi</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="restTime" class="sr-only">Rest Time (Optional)</label>
+                            <span class="input-group-addon">Rest Time(Optional)</span>
+                            <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
+                            <span class="input-group-addon">MM:SS</span>
+                        </div>
+                        <div class="input-group">
+                            <button class="input-group" type="button" id="deleteExercise" name="deleteExercise">Delete</button>
+                        </div>
+                        <datalist id="exerciseTypes">
+                            <option data-ng-repeat="(exerciseType, exercise) in fbExerciseData['exerciseType']" value="{{fbExerciseData['exerciseCategories'][exerciseType]['name']}}"></option>
+                        </datalist>
+                        <datalist id="exerciseNames">
+                            <option data-ng-repeat="(exerciseName, subName) in getExerciserNameList(selectedExerciseType.toLowerCase(), fbExerciseData['exerciseType'])" value="{{exerciseName}}"></option>
+                        </datalist>
+                        <datalist id="setTypes">
+                            <option data-ng-repeat="(setType, attrs) in getSetType(selectedExerciseType.toLowerCase(), selectedExerciseName)" value="{{setType}}"></option>
+                        </datalist>
                     </div>
-                    <div class="input-group">
-                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required>
-                        <span class="input-group-addon">HH:MM</span>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" required>
-                        <span class="input-group-addon">Mi</span>
-                    </div>
-                    <div class="input-group">
-                        <label for="restTime" class="sr-only">Rest Time(Optional)</label>
-                        <span class="input-group-addon">Rest Time(Optional)</span>
-                        <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
-                        <span class="input-group-addon">MM:SS</span>
-                    </div>
-                    <div class="input-group">
-                        <button class="input-group" type="button" id="deleteExercise" name="deleteExercise">Delete</button>
+                    <!--//First line ends here-->
+                    <div id="repsLbsContainer">
+                        <!--//Second line of form starts here-->
+                        <div class="form-inline">
+                            <div class="input-group">
+                                <span class="input-group-addon">Set</span>
+                                <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps">
+                                <span class="input-group-addon">X</span>
+                                <input type="number" name="lbs" id="lbs" class="input-group" placeholder="Lbs">
+                            </div>
+                        </div>
+                        <!--//Second line of form ends here-->
+                        <!--//Third line of form starts here-->
+                        <div class="form-inline">
+                            <div class="input-group">
+                                <button type="button" id="addRepsLbs" name="addRepsLbs" class="input-group" >Add New Set</button>
+                            </div>
+                        </div>
+                        <!--//Third line of form ends here-->
                     </div>
                 </div>
-                <datalist id="exerciseTypes">
-                    <option value=""></option>
-                </datalist>
-                <datalist id="exerciseNames">
-                    <option value=""></option>
-                </datalist>
-                <datalist id="setTypes">
-                    <option value=""></option>
-                </datalist>
-
+                <!--//Exercise Ends-->
             </div>
         </div>
         <footer>

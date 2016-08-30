@@ -50,3 +50,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+
+body{color:#000}*{display:border-box}input,option{text-transform:capitalize}

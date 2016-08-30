@@ -5,3 +5,7 @@ body{
 *{
     display:border-box;
 }
+
+input, option{
+    text-transform:capitalize;
+}
