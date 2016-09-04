@@ -1,4 +1,51 @@
-var routinesApp = angular.module("routinesApp", ["firebase"]);
+var npRoutinesDirectives = angular.module("npRoutinesDirectives", []);
+npRoutinesDirectives.directive("npreplbset", ["$compile", function($compile){
+    return {
+        restrict : "E",
+        replace : true,
+        template : `<div class="input-group">
+                        <span class="input-group-addon">Set</span>
+                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1">
+                        <span class="input-group-addon">X</span>
+                        <input type="number" name="lbs" id="lbs" class="input-group" placeholder="Lbs" min="5" step="5">
+                    </div>`
+    }
+}]);
+
+npRoutinesDirectives.directive("addnewreplbsetbtn", ["$compile", function($compile){
+    return {
+        restrict : "E",
+        replace : true,
+        template : `<div class="form-inline">
+                        <div class="input-group">
+                            <button type="button" id="addRepsLbs" name="addRepsLbs" class="input-group" data-ng-click="getHTMLForSets()" >Add New Set</button>
+                        </div>
+                    </div>`,
+        link : function(scope, element){
+            scope.getHTMLForSets =  function(){
+                angular.element(document.getElementById("repsNlbsInputContainer")).append($compile("<br/><npreplbset></npreplbset>")(scope));
+            }
+        }
+    }
+}]);
+
+npRoutinesDirectives.directive("npreplbsontainer", ["$compile", function($compile){
+    return {
+        restrict : "E",
+        replace : true,
+        template : `<div id="repsLbsContainer">
+                        <!--//Second line of form starts here-->
+                        <div class="form-inline" id="repsNlbsInputContainer">
+                            <npreplbset></npreplbset>
+                        </div>
+                        <addnewreplbsetbtn></addnewreplbsetbtn>
+                    </div>`
+    }
+}]);
+
+
+
+var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives"]);
 
 //Use following url to connect with test DB on Firebase
 routinesApp.constant("FirebaseUrl", "https://planetf-clone.firebaseio.com/");
@@ -25,6 +72,15 @@ routinesApp.service("fbConnection", ["rootNode", "rootRef", "$firebaseArray", "$
     // this.getFeedbackForReview = function(date,feedbackId){
     //     return $firebaseObject(clubId.child(date).child(feedbackId));
     // };
+}]);
+
+routinesApp.service("htmlInjector", ["$compile", function htmlInjector($compile){
+
+    this.getHTMLForSets = function(){
+        console.log("calling: getHTMLForSets");
+        var repsNlbs = `<npreplbset></npreplbset>`;
+        angular.element(document.getElementById("repsNlbsInputContainer")).append(repsNlbs);
+    }
 }]);
 
 routinesApp.service("routinesHelper", [function routinesHelper(){
@@ -179,7 +235,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 }]);
 
 
-routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", function($scope, fbConnection, routinesHelper){
+routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "htmlInjector", function($scope, fbConnection, routinesHelper, htmlInjector){
     //Initialize to get fbConnection
     var fbExerciseData = {
         "exerciseType" : fbConnection.getExercises(),
@@ -197,6 +253,10 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
     $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
 
     $scope.fbExerciseData = fbExerciseData;
+
+    //HTML Injections
+
+    $scope.getHTMLForSets = htmlInjector.getHTMLForSets;
 
 }]);
 
