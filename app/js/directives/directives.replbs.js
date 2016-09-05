@@ -7,9 +7,9 @@ replbs.directive("npreplbset", ["$compile", function($compile){
         replace : true,
         template : `<div class="input-group">
                         <span class="input-group-addon">Set</span>
-                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1">
+                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1" required>
                         <span class="input-group-addon">X</span>
-                        <input type="number" name="lbs" id="lbs" class="input-group" placeholder="Lbs" min="5" step="5">
+                        <input type="number" name="lbs" id="lbs" class="input-group" placeholder="Lbs" min="5" step="5" required>
                     </div>`
     }
 }]);
@@ -58,6 +58,8 @@ replbs.directive("npsettype", ["$compile", function($compile){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npreplbscontainer></npreplbscontainer>")(scope));
                 }else if(attrs["npsettype"] == "Reps & Body Weight"){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<nprepbwcontainer></nprepbwcontainer>")(scope));
+                }else if(attrs["npsettype"] == "Duration & Lbs"){
+                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npdurationlbcontainer></npdurationlbcontainer>")(scope));
                 }
             })
 

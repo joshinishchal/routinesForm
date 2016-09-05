@@ -7,7 +7,7 @@ repbw.directive("nprepbwset", ["$compile", function($compile){
         replace : true,
         template : `<div class="input-group">
                         <span class="input-group-addon">Set</span>
-                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1">
+                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1" required>
                         <span class="input-group-addon">X</span>
                         <span>-- Body Weight</span>
                     </div>`
