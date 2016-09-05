@@ -64,6 +64,8 @@ replbs.directive("npsettype", ["$compile", function($compile){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npdurationbwcontainer></npdurationbwcontainer>")(scope));
                 }else if(attrs["npsettype"] == "Duration"){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npdurationcontainer></npdurationcontainer>")(scope));
+                }else if(attrs["npsettype"] == "Reps"){
+                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<nprepcontainer></nprepcontainer>")(scope));
                 }
             })
 
