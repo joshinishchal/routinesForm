@@ -60,6 +60,8 @@ replbs.directive("npsettype", ["$compile", function($compile){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<nprepbwcontainer></nprepbwcontainer>")(scope));
                 }else if(attrs["npsettype"] == "Duration & Lbs"){
                     angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npdurationlbcontainer></npdurationlbcontainer>")(scope));
+                }else if(attrs["npsettype"] == "Duration & Body Weight"){
+                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npdurationbwcontainer></npdurationbwcontainer>")(scope));
                 }
             })
 
