@@ -1,4 +1,4 @@
-var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives.replbs", "npRoutinesDirectives.repbw", "npRoutinesDirectives.durationlbs", "npRoutinesDirectives.durationbw"]);
+var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives.replbs", "npRoutinesDirectives.repbw", "npRoutinesDirectives.durationlbs", "npRoutinesDirectives.durationbw", "npRoutinesDirectives.duration"]);
 
 //Use following url to connect with test DB on Firebase
 routinesApp.constant("FirebaseUrl", "https://planetf-clone.firebaseio.com/");
