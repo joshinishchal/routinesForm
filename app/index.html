@@ -53,7 +53,7 @@
                         <div class="input-group">
                             <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType">
                             <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName">
-                            <input type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}">
+                            <input type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}" npsettype={{selectedSetType}}>
                         </div>
                         <div class="input-group" data-ng-show="isDurationAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
                             <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" {{isDurationRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
@@ -83,7 +83,9 @@
                         </datalist>
                     </div>
                     <!--//First line ends here-->
-                    <npreplbsontainer></npreplbsontainer>
+                    <div id="setsContainer">
+                        <!-- <npreplbsontainer></npreplbsontainer> -->
+                    </div>
                 </div>
                 <!--//Exercise Ends-->
             </div>
@@ -124,6 +126,9 @@
 <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js" defer></script>
 
 <!--// Application Data-->
-<script src="./js/minified/app.min.js" defer></script>
+<!-- <script src="./js/minified/app.min.js" defer></script> -->
+<script src="./js/directives/directives.js" defer></script>
+<script src="./js/directives/dir-repslbs.js" defer></script>
+<script src="./js/app.js" defer></script>
 </body>
 </html>

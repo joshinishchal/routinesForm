@@ -1,50 +1,3 @@
-var npRoutinesDirectives = angular.module("npRoutinesDirectives", []);
-npRoutinesDirectives.directive("npreplbset", ["$compile", function($compile){
-    return {
-        restrict : "E",
-        replace : true,
-        template : `<div class="input-group">
-                        <span class="input-group-addon">Set</span>
-                        <input type="number" name="reps" id="reps" class="input-group" placeholder="Reps" min="1" step="1">
-                        <span class="input-group-addon">X</span>
-                        <input type="number" name="lbs" id="lbs" class="input-group" placeholder="Lbs" min="5" step="5">
-                    </div>`
-    }
-}]);
-
-npRoutinesDirectives.directive("addnewreplbsetbtn", ["$compile", function($compile){
-    return {
-        restrict : "E",
-        replace : true,
-        template : `<div class="form-inline">
-                        <div class="input-group">
-                            <button type="button" id="addRepsLbs" name="addRepsLbs" class="input-group" data-ng-click="getHTMLForSets()" >Add New Set</button>
-                        </div>
-                    </div>`,
-        link : function(scope, element){
-            scope.getHTMLForSets =  function(){
-                angular.element(document.getElementById("repsNlbsInputContainer")).append($compile("<br/><npreplbset></npreplbset>")(scope));
-            }
-        }
-    }
-}]);
-
-npRoutinesDirectives.directive("npreplbsontainer", ["$compile", function($compile){
-    return {
-        restrict : "E",
-        replace : true,
-        template : `<div id="repsLbsContainer">
-                        <!--//Second line of form starts here-->
-                        <div class="form-inline" id="repsNlbsInputContainer">
-                            <npreplbset></npreplbset>
-                        </div>
-                        <addnewreplbsetbtn></addnewreplbsetbtn>
-                    </div>`
-    }
-}]);
-
-
-
 var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives"]);
 
 //Use following url to connect with test DB on Firebase
@@ -93,6 +46,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         "wtd"       : "Lbs",
         "bw"        : "Body Weight"
     };
+    var joiningStr = " & ";
     function createExerciseNameList(obj){
         if(!obj["cardio"]){
             return;
@@ -117,7 +71,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                     for(var n in obj[i][j]["attributes"]["groups"][m]){
                                         tempArr.push(setDictionary[obj[i][j]["attributes"]["groups"][m][n]]);
                                     }
-                                    var str = tempArr.join(" & ");
+                                    var str = tempArr.join(joiningStr);
                                     exerciserNameList[i][obj[i][j]["name"]]["setType"][str] = obj[i][j]["attributes"]["groups"][m];
                                     exerciserNameList[i][obj[i][j]["name"]]["totalSet"]++;
                             }
@@ -137,7 +91,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                         tempArr.push(setDictionary[obj[i][j][k]["attributes"]["groups"][l][o]]);
                                     }
 
-                                    var str = tempArr.join(" & ");
+                                    var str = tempArr.join(joiningStr);
                                     exerciserNameList[i][obj[i][j][k]["name"]]["setType"][str] = obj[i][j][k]["attributes"]["groups"][l];
                                     exerciserNameList[i][obj[i][j][k]["name"]]["totalSet"]++;
                                 }
@@ -171,25 +125,27 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined"){
             if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1){
                 for(var i in exerciserNameList[exerciseType][exerciseName]["setType"]){
-                    if(i.indexOf(" & ") >= 0){
+                    if(i.indexOf(joiningStr) >= 0){
                         for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][i]){
                             if(exerciserNameList[exerciseType][exerciseName]["setType"][i][j] == str){
                                 flag = true;
+                                //console.log(str + " : " + flag);
                                 return flag;
                             }
                         }
                     }
                 }
             }else if(typeof selectedSetType != "undefined"){
-                console.log("in else if, str: " + str);
                 for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType]){
                     if(exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType][j] == str){
                         flag = true;
+                        //console.log(str + " : " + flag);
                         return flag;
                     }
                 }
             }
         }
+        //console.log(str + " : " + flag);
         return flag;
     }
 
