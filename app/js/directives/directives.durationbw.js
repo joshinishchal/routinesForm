@@ -1,7 +1,7 @@
-var repbw = angular.module("npRoutinesDirectives.durationbw", []);
+var durationbw = angular.module("npRoutinesDirectives.durationbw", []);
 
 /*Contains all the directives to show Reps and Body Weight*/
-repbw.directive("npdurationbwset", ["$compile", function($compile){
+durationbw.directive("npdurationbwset", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
@@ -14,7 +14,7 @@ repbw.directive("npdurationbwset", ["$compile", function($compile){
     }
 }]);
 
-repbw.directive("addnewdurationbwsetbtn", ["$compile", function($compile){
+durationbw.directive("addnewdurationbwsetbtn", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
@@ -31,7 +31,7 @@ repbw.directive("addnewdurationbwsetbtn", ["$compile", function($compile){
     }
 }]);
 
-replbs.directive("npdurationbwcontainer", ["$compile", function($compile){
+durationbw.directive("npdurationbwcontainer", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
