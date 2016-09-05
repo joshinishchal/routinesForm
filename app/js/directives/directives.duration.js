@@ -24,7 +24,7 @@ duration.directive("addnewdurationsetbtn", ["$compile", function($compile){
                     </div>`,
         link : function(scope, element){
             scope.getHTMLForDuration =  function(){
-                angular.element(document.getElementById("durationInputContainer")).append($compile("<br/><npdurationset></npdurationset>")(scope));
+                angular.element(element.parent().parent().parent().find("#durationInputContainer")).append($compile("<br/><npdurationset></npdurationset>")(scope));
             }
         }
     }

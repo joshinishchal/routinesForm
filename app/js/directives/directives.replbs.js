@@ -25,7 +25,7 @@ replbs.directive("addnewreplbsetbtn", ["$compile", function($compile){
                     </div>`,
         link : function(scope, element){
             scope.getHTMLForSetLbs =  function(){
-                angular.element(document.getElementById("repsNlbsInputContainer")).append($compile("<br/><npreplbset></npreplbset>")(scope));
+                angular.element(element.parent().parent().parent().find("#repsNlbsInputContainer")).append($compile("<br/><npreplbset></npreplbset>")(scope));
             }
         }
     }

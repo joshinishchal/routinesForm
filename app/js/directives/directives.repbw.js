@@ -26,7 +26,7 @@ repbw.directive("addnewrepbwsetbtn", ["$compile", function($compile){
         link : function(scope, element){
             scope.getHTMLForSetBw =  function(){
 
-                angular.element(document.getElementById("repsNBwInputContainer")).append($compile("<br/><nprepbwset></nprepbwset>")(scope));
+                angular.element(element.parent().parent().parent().find("#repsNBwInputContainer")).append($compile("<br/><nprepbwset></nprepbwset>")(scope));
             }
         }
     }

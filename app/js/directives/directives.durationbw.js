@@ -25,7 +25,7 @@ durationbw.directive("addnewdurationbwsetbtn", ["$compile", function($compile){
                     </div>`,
         link : function(scope, element){
             scope.getHTMLForDurationBw =  function(){
-                angular.element(document.getElementById("durationLbsInputContainer")).append($compile("<br/><npdurationbwset></npdurationbwset>")(scope));
+                angular.element(element.parent().parent().parent().find("#durationLbsInputContainer")).append($compile("<br/><npdurationbwset></npdurationbwset>")(scope));
             }
         }
     }

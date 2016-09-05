@@ -23,7 +23,7 @@ rep.directive("addnewrepsetbtn", ["$compile", function($compile){
                     </div>`,
         link : function(scope, element){
             scope.getHTMLForRep =  function(){
-                angular.element(document.getElementById("repsInputContainer")).append($compile("<br/><nprepset></nprepset>")(scope));
+                angular.element(element.parent().parent().parent().find("#repsInputContainer")).append($compile("<br/><nprepset></nprepset>")(scope));
             }
         }
     }
