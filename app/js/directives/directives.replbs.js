@@ -1,7 +1,7 @@
-var npRoutinesDirectives = angular.module("npRoutinesDirectives", []);
+var replbs = angular.module("npRoutinesDirectives.replbs", []);
 
 /* Contains all the directives needed to show Reps and Sets.*/
-npRoutinesDirectives.directive("npreplbset", ["$compile", function($compile){
+replbs.directive("npreplbset", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
@@ -14,24 +14,24 @@ npRoutinesDirectives.directive("npreplbset", ["$compile", function($compile){
     }
 }]);
 
-npRoutinesDirectives.directive("addnewreplbsetbtn", ["$compile", function($compile){
+replbs.directive("addnewreplbsetbtn", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
         template : `<div class="form-inline">
                         <div class="input-group">
-                            <button type="button" id="addRepsLbs" name="addRepsLbs" class="input-group" data-ng-click="getHTMLForSets()" >Add New Set</button>
+                            <button type="button" id="addRepsLbs" name="addRepsLbs" class="input-group" data-ng-click="getHTMLForSetLbs()" >Add New Set</button>
                         </div>
                     </div>`,
         link : function(scope, element){
-            scope.getHTMLForSets =  function(){
+            scope.getHTMLForSetLbs =  function(){
                 angular.element(document.getElementById("repsNlbsInputContainer")).append($compile("<br/><npreplbset></npreplbset>")(scope));
             }
         }
     }
 }]);
 
-npRoutinesDirectives.directive("npreplbsontainer", ["$compile", function($compile){
+replbs.directive("npreplbscontainer", ["$compile", function($compile){
     return {
         restrict : "E",
         replace : true,
@@ -45,19 +45,22 @@ npRoutinesDirectives.directive("npreplbsontainer", ["$compile", function($compil
     }
 }]);
 
-npRoutinesDirectives.directive("npsettype", ["$compile", function($compile){
+/* Contains all the directives needed to show Reps and Sets.*/
+
+replbs.directive("npsettype", ["$compile", function($compile){
     return {
         restrict : "A",
         replace : false,
         link : function(scope, element, attrs){
             element.on("change",function(){
-                angular.element(element.parent().parent().parent().find("#setsContainer #repsLbsContainer")).remove();
+                angular.element(element.parent().parent().parent().find("#setsContainer *")).remove();
                 if(attrs["npsettype"] == "Reps & Lbs"){
-                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npreplbsontainer></npreplbsontainer>")(scope));
+                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<npreplbscontainer></npreplbscontainer>")(scope));
+                }else if(attrs["npsettype"] == "Reps & Body Weight"){
+                    angular.element(element.parent().parent().parent().find("#setsContainer")).append($compile("<nprepbwcontainer></nprepbwcontainer>")(scope));
                 }
             })
 
         }
     }
 }]);
-
