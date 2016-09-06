@@ -7,7 +7,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/stylesheet.css">
-
+    <link rel="stylesheet" href="./css/login.css">
     <title>Routines App</title>
 </head>
 <body>
@@ -114,23 +114,37 @@
 </section>
 <footer>
 </footer>
-</div>
+</div> -->
 
-<div class="loginPage" data-ng-controller="routineLogin" class="container">
-    <div class="login-page container">
-            <div class="loginForm">     
-                <p>Lorem ipsum dolor sit.
-             Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                <form class="login-form">
-                  <label for="userName">Email</label>
-                  <input type="text" placeholder="xxxxxxxxxx"/>
-                  <label for="userName">Password</label>
-                  <input type="password" placeholder="xxxxxxxxxx"/>
-                  <button>login</button>
-                </form>          
-            </div>
+<div class="loginPage" data-ng-controller="" class="container">
+    <div class="loginPage" class="container">
+        <div class="login-page container">
+                <div class="loginForm">     
+                    <p>Lorem ipsum dolor sit.
+                 Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <form class="login-form" onsubmit="return validateForm()">
+                      <label for="userName">Email</label>
+                      <input type="text" id="username" placeholder="xxxxxxxxxx"/>
+                      <label for="userName">Password</label>
+                      <input type="password" id="password" placeholder="xxxxxxxxxx"/>
+                      <button>login</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+        <!-- The Modal -->
+    <div id="myModal" class="modal" >
+
+      <!-- Modal content -->
+      <div class="modal-content">   
+        <p>Uh oh. Something’s not right.</p>
+        <p>The email and/or password you entered is incorrect. Please try again or contact xxx@netpulse.com to reset your password.</p>
+        <input type="submit" value="Ok" id="close" >
+      </div>
     </div>
 </div>
+
 
 
 
@@ -159,5 +173,6 @@
 
 <!--// Application Data-->
 <script src="./js/minified/app.min.js" defer></script>
+<script src="./js/login.js" defer></script>
 </body>
 </html>
