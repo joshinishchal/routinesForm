@@ -52,16 +52,10 @@
                     <div class="form-inline">
                         <div class="input-group exerciseSelector">
                             <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType">
-                            <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName">
-                            <input type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}" npsettype={{selectedSetType}}>
+                            <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
+                            <input type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}" npsettype={{selectedSetType}} npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
                         </div>
-                        <div class="input-group" data-ng-show="isDurationAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
-                            <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" {{isDurationRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
-                            <span class="input-group-addon">HH:MM</span>
-                        </div>
-                        <div class="input-group" data-ng-show="isDistanceAvailable(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)">
-                            <input type="text" class="input-group" name="distance" id="distance" placeholder="Distance" {{isDistanceRequired(selectedExerciseType.toLowerCase(), selectedExerciseName, selectedSetType)}}>
-                            <span class="input-group-addon">Mi</span>
+                        <div class="input-group cardioContainer">
                         </div>
                         <div class="input-group">
                             <label for="restTime" class="sr-only">Rest Time (Optional)</label>
@@ -134,6 +128,7 @@
 <script src="./js/directives/directives.durationlbs.js" defer></script>
 <script src="./js/directives/directives.duration.js" defer></script>
 <script src="./js/directives/directives.durationbw.js" defer></script>
+<script src="./js/directives/directives.cardioset.js" defer></script>
 
 <!--//Our main application-->
 <script src="./js/app.js" defer></script>

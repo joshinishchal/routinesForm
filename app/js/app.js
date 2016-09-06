@@ -1,4 +1,4 @@
-var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives.replbs", "npRoutinesDirectives.repbw", "npRoutinesDirectives.durationlbs", "npRoutinesDirectives.durationbw", "npRoutinesDirectives.duration", "npRoutinesDirectives.rep"]);
+var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives.replbs", "npRoutinesDirectives.repbw", "npRoutinesDirectives.durationlbs", "npRoutinesDirectives.durationbw", "npRoutinesDirectives.duration", "npRoutinesDirectives.rep", "npRoutinesDirectives.cardioset"]);
 
 //Use following url to connect with test DB on Firebase
 routinesApp.constant("FirebaseUrl", "https://planetf-clone.firebaseio.com/");
@@ -149,11 +149,17 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         return flag;
     }
 
-    this.isDurationAvailable = function(exerciseType, exerciseName, selectedSetType){
+    function isDurationAvailable(exerciseType, exerciseName, selectedSetType){
+        if(exerciseType !== "cardio"){
+            return false;
+        }
+
         var str = "duration";
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
 
-    };
+    }
+
+    this.isDurationAvailable = isDurationAvailable;
 
     this.isDurationRequired = function(exerciseType, exerciseName, selectedSetType){
         console.log("in duration required");
@@ -165,10 +171,24 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         }
     };
 
-    this.isDistanceAvailable = function(exerciseType, exerciseName, selectedSetType){
+    function isDistanceAvailable(exerciseType, exerciseName, selectedSetType){
+        if(exerciseType !== "cardio"){
+            return false;
+        }
         var str = "distance";
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
-    };
+    }
+
+    this.isDistanceAvailable = isDistanceAvailable;
+
+    this.getDurationDistanceVisibility = function(exerciseType, exerciseName, selectedSetType){
+        console.log("in here..");
+        if(exerciseType !== "cardio"){
+            return JSON.stringify({'duration' : false, 'distance': false});
+        }else{
+            return JSON.stringify({'duration' : isDurationAvailable(exerciseType, exerciseName, selectedSetType), 'distance': isDistanceAvailable(exerciseType, exerciseName, selectedSetType)});
+        }
+    }
 
     this.isDistanceRequired = function(exerciseType, exerciseName, selectedSetType){
         console.log("in distance required");
@@ -204,6 +224,8 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
 
     $scope.isDistanceAvailable = routinesHelper.isDistanceAvailable;
     $scope.isDistanceRequired = routinesHelper.isDistanceRequired;
+
+    $scope.getDurationDistanceVisibility = routinesHelper.getDurationDistanceVisibility;
 
     $scope.getSetType = routinesHelper.getSetType;
     $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
