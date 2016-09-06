@@ -1,4 +1,4 @@
-var routinesApp = angular.module("routinesApp", ["firebase"]);
+var routinesApp = angular.module("routinesApp", ["firebase", "npRoutinesDirectives.replbs", "npRoutinesDirectives.repbw", "npRoutinesDirectives.durationlbs", "npRoutinesDirectives.durationbw", "npRoutinesDirectives.duration", "npRoutinesDirectives.rep", "npRoutinesDirectives.cardioset"]);
 
 //Use following url to connect with test DB on Firebase
 routinesApp.constant("FirebaseUrl", "https://planetf-clone.firebaseio.com/");
@@ -27,6 +27,15 @@ routinesApp.service("fbConnection", ["rootNode", "rootRef", "$firebaseArray", "$
     // };
 }]);
 
+routinesApp.service("htmlInjector", ["$compile", function htmlInjector($compile){
+
+    this.getHTMLForSets = function(){
+        console.log("calling: getHTMLForSets");
+        var repsNlbs = `<npreplbset></npreplbset>`;
+        angular.element(document.getElementById("repsNlbsInputContainer")).append(repsNlbs);
+    }
+}]);
+
 routinesApp.service("routinesHelper", [function routinesHelper(){
     exerciserNameList = {};
     var setDictionary = {
@@ -37,6 +46,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         "wtd"       : "Lbs",
         "bw"        : "Body Weight"
     };
+    var joiningStr = " & ";
     function createExerciseNameList(obj){
         if(!obj["cardio"]){
             return;
@@ -61,7 +71,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                     for(var n in obj[i][j]["attributes"]["groups"][m]){
                                         tempArr.push(setDictionary[obj[i][j]["attributes"]["groups"][m][n]]);
                                     }
-                                    var str = tempArr.join(" & ");
+                                    var str = tempArr.join(joiningStr);
                                     exerciserNameList[i][obj[i][j]["name"]]["setType"][str] = obj[i][j]["attributes"]["groups"][m];
                                     exerciserNameList[i][obj[i][j]["name"]]["totalSet"]++;
                             }
@@ -81,7 +91,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
                                         tempArr.push(setDictionary[obj[i][j][k]["attributes"]["groups"][l][o]]);
                                     }
 
-                                    var str = tempArr.join(" & ");
+                                    var str = tempArr.join(joiningStr);
                                     exerciserNameList[i][obj[i][j][k]["name"]]["setType"][str] = obj[i][j][k]["attributes"]["groups"][l];
                                     exerciserNameList[i][obj[i][j][k]["name"]]["totalSet"]++;
                                 }
@@ -115,33 +125,41 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined"){
             if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1){
                 for(var i in exerciserNameList[exerciseType][exerciseName]["setType"]){
-                    if(i.indexOf(" & ") >= 0){
+                    if(i.indexOf(joiningStr) >= 0){
                         for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][i]){
                             if(exerciserNameList[exerciseType][exerciseName]["setType"][i][j] == str){
                                 flag = true;
+                                //console.log(str + " : " + flag);
                                 return flag;
                             }
                         }
                     }
                 }
             }else if(typeof selectedSetType != "undefined"){
-                console.log("in else if, str: " + str);
                 for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType]){
                     if(exerciserNameList[exerciseType][exerciseName]["setType"][selectedSetType][j] == str){
                         flag = true;
+                        //console.log(str + " : " + flag);
                         return flag;
                     }
                 }
             }
         }
+        //console.log(str + " : " + flag);
         return flag;
     }
 
-    this.isDurationAvailable = function(exerciseType, exerciseName, selectedSetType){
+    function isDurationAvailable(exerciseType, exerciseName, selectedSetType){
+        if(exerciseType !== "cardio"){
+            return false;
+        }
+
         var str = "duration";
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
 
-    };
+    }
+
+    this.isDurationAvailable = isDurationAvailable;
 
     this.isDurationRequired = function(exerciseType, exerciseName, selectedSetType){
         console.log("in duration required");
@@ -153,10 +171,24 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
         }
     };
 
-    this.isDistanceAvailable = function(exerciseType, exerciseName, selectedSetType){
+    function isDistanceAvailable(exerciseType, exerciseName, selectedSetType){
+        if(exerciseType !== "cardio"){
+            return false;
+        }
         var str = "distance";
         return checkAttribute(exerciseType, exerciseName, selectedSetType, str);
-    };
+    }
+
+    this.isDistanceAvailable = isDistanceAvailable;
+
+    this.getDurationDistanceVisibility = function(exerciseType, exerciseName, selectedSetType){
+        console.log("in here..");
+        if(exerciseType !== "cardio"){
+            return JSON.stringify({'duration' : false, 'distance': false});
+        }else{
+            return JSON.stringify({'duration' : isDurationAvailable(exerciseType, exerciseName, selectedSetType), 'distance': isDistanceAvailable(exerciseType, exerciseName, selectedSetType)});
+        }
+    }
 
     this.isDistanceRequired = function(exerciseType, exerciseName, selectedSetType){
         console.log("in distance required");
@@ -179,7 +211,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 }]);
 
 
-routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", function($scope, fbConnection, routinesHelper){
+routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "htmlInjector", function($scope, fbConnection, routinesHelper, htmlInjector){
     //Initialize to get fbConnection
     var fbExerciseData = {
         "exerciseType" : fbConnection.getExercises(),
@@ -193,10 +225,16 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
     $scope.isDistanceAvailable = routinesHelper.isDistanceAvailable;
     $scope.isDistanceRequired = routinesHelper.isDistanceRequired;
 
+    $scope.getDurationDistanceVisibility = routinesHelper.getDurationDistanceVisibility;
+
     $scope.getSetType = routinesHelper.getSetType;
     $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
 
     $scope.fbExerciseData = fbExerciseData;
+
+    //HTML Injections
+
+    $scope.getHTMLForSets = htmlInjector.getHTMLForSets;
 
 }]);
 
