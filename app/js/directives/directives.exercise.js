@@ -57,6 +57,7 @@ exerciseDir.directive("deleteexercise", [function(){
         replace : false,
         link : function(scope, element){
             element.on("click", function(){
+                angular.element(element.parent().parent().parent().prev("br")).remove();
                 angular.element(element.parent().parent().parent()).remove();
             })
         }
