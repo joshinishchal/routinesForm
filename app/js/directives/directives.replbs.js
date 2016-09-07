@@ -72,3 +72,15 @@ replbs.directive("npsettype", ["$compile", function($compile){
         }
     }
 }]);
+
+replbs.directive("deleteexercise", [function(){
+    return {
+        restrict : "A",
+        replace : false,
+        link : function(scope, element){
+            element.on("click", function(){
+                angular.element(element.parent().parent().parent()).remove();
+            })
+        }
+    }
+}]);
