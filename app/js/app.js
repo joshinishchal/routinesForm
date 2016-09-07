@@ -150,7 +150,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
     }
 
     function isDurationAvailable(exerciseType, exerciseName, selectedSetType){
-        if(exerciseType !== "cardio"){
+        if(exerciseType !== "cardio" && exerciseType !== "classes"){
             return false;
         }
 
@@ -172,7 +172,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
     };
 
     function isDistanceAvailable(exerciseType, exerciseName, selectedSetType){
-        if(exerciseType !== "cardio"){
+        if(exerciseType !== "cardio" && exerciseType !== "classes"){
             return false;
         }
         var str = "distance";
@@ -182,8 +182,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
     this.isDistanceAvailable = isDistanceAvailable;
 
     this.getDurationDistanceVisibility = function(exerciseType, exerciseName, selectedSetType){
-        console.log("in here..");
-        if(exerciseType !== "cardio"){
+        if(exerciseType !== "cardio" && exerciseType !== "classes"){
             return JSON.stringify({'duration' : false, 'distance': false});
         }else{
             return JSON.stringify({'duration' : isDurationAvailable(exerciseType, exerciseName, selectedSetType), 'distance': isDistanceAvailable(exerciseType, exerciseName, selectedSetType)});
