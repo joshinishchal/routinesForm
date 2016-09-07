@@ -60,9 +60,8 @@
                         </div>
                         <div class="input-group">
                             <label for="restTime" class="sr-only">Rest Time (Optional)</label>
-                            <span class="input-group-addon">Rest Time(Optional)</span>
-                            <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
-                            <span class="input-group-addon">MM:SS</span>
+                            <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time(Optional)" pattern="[0-9]{1,2}[\:]{1}[0-9]{2}">
+                            <span class="input-group-addon">mm:ss</span>
                         </div>
                         <div class="input-group delete-div">
                             <button class="input-group delete-btn" type="button" id="deleteExercise" name="deleteExercise">Delete</button>
