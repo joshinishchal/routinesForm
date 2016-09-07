@@ -32,6 +32,8 @@ cardioset.directive("npcardioset", ["$compile", function($compile){
         link : function(scope, element, attrs){
             element.on("change",function(){
 
+                var myObj = JSON.parse(attrs["npcardioset"]);
+
                 angular.element(element.parent().parent().find(".cardioContainer *")).remove();
 
                 if(myObj["duration"]){
