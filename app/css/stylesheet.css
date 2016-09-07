@@ -1,1 +1,1 @@
-body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
+body{color:#000;box-sizing:border-box;display:flex;display:-webkit-flex}input{border:1px solid #000!important;padding-left:7px}input,option{text-transform:capitalize}.exercise{background-color:#D3D3D3}.exercise .exerciseSelector input{margin-left:7px}.exercise .setsContainer{-webkit-justify-content:center;justify-content:center}.exercise .delete-div{-webkit-justify-content:flex-end;justify-content:flex-end}
