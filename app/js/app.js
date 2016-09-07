@@ -123,7 +123,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
     function checkAttribute(exerciseType, exerciseName, selectedSetType, str){
         var flag = false;
         if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined"){
-            if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1){
+            if(exerciserNameList[exerciseType][exerciseName]["totalSet"] == 1 || exerciseType == "cardio" || exerciseType == "classes"){
                 for(var i in exerciserNameList[exerciseType][exerciseName]["setType"]){
                     if(i.indexOf(joiningStr) >= 0){
                         for(var j in exerciserNameList[exerciseType][exerciseName]["setType"][i]){
@@ -201,8 +201,12 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 
     this.isSetTypeVisible = function(exerciseType, exerciseName){
         var flag = false;
-        if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined" && typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined" && exerciserNameList[exerciseType][exerciseName]["totalSet"] > 1){
-            flag = true;
+        if(typeof exerciseType != "undefined" && typeof exerciseName != "undefined"){
+            if(exerciseType == "cardio" || exerciseType == "classes"){
+                flag = false;
+            }else if(typeof exerciserNameList[exerciseType] != "undefined" && typeof exerciserNameList[exerciseType][exerciseName] != "undefined" && exerciserNameList[exerciseType][exerciseName]["totalSet"] > 1){
+                flag = true;
+            }
         }
         return flag;
     };
