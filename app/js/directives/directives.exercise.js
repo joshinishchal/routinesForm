@@ -11,7 +11,7 @@ exerciseDir.directive("npexercise", [function(){
                         <div class="form-inline">
                             <div class="input-group exerciseSelector">
                                 <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="{{exerciseTypesId}}" placeholder="Select Type" data-ng-model="selectedExerciseType" required>
-                                <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="{{exerciseNamesId}}" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}} exerciseType>
+                                <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="{{exerciseNamesId}}" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}} exerciseType required>
                                 <input type="text" class="input-group" name="setType" id="setType" list="{{setTypesId}}" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" npsettype={{selectedSetType}} npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
                             </div>
                             <div class="input-group cardioContainer">
