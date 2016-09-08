@@ -94,18 +94,18 @@
 </footer>
 </div> -->
 
-<div class="loginPage" data-ng-controller="" class="container">
+<div class="loginPage" data-ng-controller="loginController" class="container">
     <div class="loginPage" class="container">
         <div class="login-page container">
                 <div class="loginForm">     
                     <p>Lorem ipsum dolor sit.
                  Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                    <form class="login-form" onsubmit="return validateForm()">
+                    <form class="login-form">
                       <label for="userName">Email</label>
-                      <input type="text" id="username" placeholder="xxxxxxxxxx"/>
+                      <input type="text" id="username" placeholder="xxxxxxxxxx" data-ng-model="userName"/>
                       <label for="userName">Password</label>
-                      <input type="password" id="password" placeholder="xxxxxxxxxx"/>
-                      <button>login</button>
+                      <input type="password" id="password" placeholder="xxxxxxxxxx" data-ng-model="password"/>
+                      <button data-ng-click="submit()">login</button>
                     </form>
                 </div>
         </div>
@@ -118,7 +118,7 @@
       <div class="modal-content">   
         <p>Uh oh. Something’s not right.</p>
         <p>The email and/or password you entered is incorrect. Please try again or contact xxx@netpulse.com to reset your password.</p>
-        <input type="submit" value="Ok" id="close" >
+        <input type="submit" value="Ok" id="close" data-ng-click="closeModal()">
       </div>
     </div>
 </div>

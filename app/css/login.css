@@ -112,9 +112,6 @@ body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
 
 
 /* The Modal (background) */
-.hide{
-  display: none;
-}
 .modal {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
