@@ -22,39 +22,41 @@
             <p>Hello, Planet Fitness Admin. Setting up a routine is easy. Let's get started!</p>
         </header>
 
-        <div class="form-group">
-            <label for="routineTitle">Routine Title<sup>*</sup></label>
-            <input type="text" id="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description<sup>*</sup></label>
-            <textarea id="description"  data-ng-model="description" placeholder="Write here something about this routine." rows="4" cols="50" class="form-control"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label>Unit of Measure<sup>*</sup></label>
-            <div class="form-inline">
-                <input type="radio" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
-            <input class="form-control radio" type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
+        <form name="routines">
+            <div class="form-group">
+                <label for="routineTitle">Routine Title<sup>*</sup></label>
+                <input type="text" id="routineTitle" name="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays" class="form-control" required>
             </div>
-        </div>
 
-        <p>
-            <p class="pull-left">Exercises</p>
-            <button class="pull-right btn btn-success" addnewexercise>ADD NEW EXERCISES</button>
-        </p>
-
-        <div id="exercises">
-            <div id="exerciseContainer" class="form-group">
-            <!--Add exercise here-->
+            <div class="form-group">
+                <label for="description">Description<sup>*</sup></label>
+                <textarea id="routineDescription" name="routineDescription" data-ng-model="routineDescription" placeholder="Write here something about this routine." rows="4" cols="50" class="form-control" required></textarea>
             </div>
-        </div>
 
-        <footer>
-            <p>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</p>
-            <button type="submit" data-ng-click="publish" class="btn btn-primary">Publish</button>
-        </footer>
+            <div class="form-group">
+                <label>Unit of Measure<sup>*</sup></label>
+                <div class="form-inline">
+                    <input type="radio" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
+                <input class="form-control radio" type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
+                </div>
+            </div>
+
+            <p>
+                <p class="pull-left">Exercises</p>
+                <button class="pull-right btn btn-success" addnewexercise>ADD NEW EXERCISES</button>
+            </p>
+
+            <div id="exercises">
+                <div id="exerciseContainer" class="form-group">
+                <!--Add exercise here-->
+                </div>
+            </div>
+
+            <footer>
+                <p>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</p>
+                <button type="submit" data-ng-click="getFormObject()" class="btn btn-primary" data-ng-disabled="routines.$invalid">Publish</button>
+            </footer>
+        </form>
 </section>
 <footer>
 </footer>

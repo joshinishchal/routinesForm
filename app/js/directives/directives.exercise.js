@@ -10,15 +10,15 @@ exerciseDir.directive("npexercise", [function(){
                         <!--//First line of form starts here-->
                         <div class="form-inline">
                             <div class="input-group exerciseSelector">
-                                <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="{{exerciseTypesId}}" placeholder="Select Type" data-ng-model="selectedExerciseType" required>
-                                <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="{{exerciseNamesId}}" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}} exerciseType required>
+                                <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="{{exerciseTypesId}}" placeholder="Select Type*" data-ng-model="selectedExerciseType" data-ng-change="selectedExerciseName=''" required>
+                                <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="{{exerciseNamesId}}" placeholder="Exercise Name*" data-ng-model="selectedExerciseName" data-ng-change="selectedSetType=''" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}} exerciseType required>
                                 <input type="text" class="input-group" name="setType" id="setType" list="{{setTypesId}}" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" npsettype={{selectedSetType}} npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
                             </div>
                             <div class="input-group cardioContainer">
                             </div>
                             <div class="input-group">
                                 <label for="restTime" class="sr-only">Rest Time (Optional)</label>
-                                <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time(Optional)" pattern="[0-9]{1,2}[\:]{1}[0-9]{2}">
+                                <input type="text" class="input-group" name="restTime" id="restTime" data-ng-model="restTime" placeholder="Rest Time(Optional)" data-ng-pattern="'[0-9]{1,2}[\:]{1}[0-9]{2}'">
                                 <span class="input-group-addon">mm:ss</span>
                             </div>
                             <div class="input-group delete-div">

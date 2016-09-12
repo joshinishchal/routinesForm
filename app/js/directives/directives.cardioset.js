@@ -6,7 +6,7 @@ cardioset.directive("npcardioduration", ["$compile", function($compile){
         restrict : "E",
         replace : true,
         template : `<div class="input-group">
-                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" required="">
+                        <input type="text" class="input-group" name="duration" id="duration" placeholder="Duration" data-ng-model="cardioDuration" data-ng-pattern="'[0-9]{1,2}[\:]{1}[0-9]{2}'" required="">
                         <span class="input-group-addon">HH:MM</span>
                     </div>`
     }

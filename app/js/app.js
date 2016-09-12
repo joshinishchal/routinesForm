@@ -36,6 +36,36 @@ routinesApp.service("htmlInjector", ["$compile", function htmlInjector($compile)
     }
 }]);
 
+routinesApp.service("formValidation", ["routinesHelper", function formValidation(routinesHelper){
+    this.getFormObject = function(form){
+        var now = Date.now();
+        // nishchal = form;
+        // console.log(form.exerciseType[0].value);
+
+        var routineObj = {};
+        routineObj["descriptions"] = form.routineDescription.value;
+        routineObj["name"] = form.routineTitle.value;
+        routineObj["saved"] = true;
+        routineObj["time_created"] = now;
+        routineObj["time_last_updated"] = now;
+        routineObj["exercises"] = {};
+    }
+
+    this.getExercoseObj = function(obj){
+        var now = Date.now();
+        return {
+            "calories" : 0,
+            "completed" : false,
+            "created_time" : now,
+            "distance" : 0,
+            "duration" : 0,
+            "name" : "exerciseName",
+            "parent" : "exerciseType",
+            "sets" : ""
+        }
+    }
+}]);
+
 routinesApp.service("routinesHelper", [function routinesHelper(){
     exerciserNameList = {};
     var setDictionary = {
@@ -214,7 +244,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 }]);
 
 
-routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "htmlInjector", function($scope, fbConnection, routinesHelper, htmlInjector){
+routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "htmlInjector", "formValidation", function($scope, fbConnection, routinesHelper, htmlInjector, formValidation){
     //Initialize to get fbConnection
     var fbExerciseData = {
         "exerciseType" : fbConnection.getExercises(),
@@ -238,6 +268,8 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
     //HTML Injections
 
     $scope.getHTMLForSets = htmlInjector.getHTMLForSets;
+
+    $scope.getFormObject = function(){formValidation.getFormObject(routines)};
 
 }]);
 

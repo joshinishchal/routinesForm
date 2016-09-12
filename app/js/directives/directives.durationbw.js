@@ -7,7 +7,7 @@ durationbw.directive("npdurationbwset", ["$compile", function($compile){
         replace : true,
         template : `<div class="input-group">
                         <span class="input-group-addon">Set</span>
-                        <input type="text" name="duration" id="duration" class="input-group" placeholder="MM:SS" pattern="[0-9]{1,2}[\:]{1}[0-9]{2}" required>
+                        <input type="text" name="duration" id="duration" class="input-group" placeholder="MM:SS" data-ng-pattern="'[0-9]{1,2}[\:]{1}[0-9]{2}'" required>
                         <span class="input-group-addon">X</span>
                         <span>-- Body Weight</span>
                     </div>`
