@@ -27,15 +27,6 @@ routinesApp.service("fbConnection", ["rootNode", "rootRef", "$firebaseArray", "$
     // };
 }]);
 
-routinesApp.service("htmlInjector", ["$compile", function htmlInjector($compile){
-
-    this.getHTMLForSets = function(){
-        console.log("calling: getHTMLForSets");
-        var repsNlbs = `<npreplbset></npreplbset>`;
-        angular.element(document.getElementById("repsNlbsInputContainer")).append(repsNlbs);
-    }
-}]);
-
 routinesApp.service("formValidation", ["routinesHelper", function formValidation(routinesHelper){
     this.getFormObject = function(form){
         var now = Date.now();
@@ -244,7 +235,7 @@ routinesApp.service("routinesHelper", [function routinesHelper(){
 }]);
 
 
-routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "htmlInjector", "formValidation", function($scope, fbConnection, routinesHelper, htmlInjector, formValidation){
+routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesHelper", "formValidation", function($scope, fbConnection, routinesHelper, formValidation){
     //Initialize to get fbConnection
     var fbExerciseData = {
         "exerciseType" : fbConnection.getExercises(),
@@ -264,10 +255,6 @@ routinesApp.controller("createNewRoutine", ["$scope", "fbConnection", "routinesH
     $scope.isSetTypeVisible = routinesHelper.isSetTypeVisible;
 
     $scope.fbExerciseData = fbExerciseData;
-
-    //HTML Injections
-
-    $scope.getHTMLForSets = htmlInjector.getHTMLForSets;
 
     $scope.getFormObject = function(){formValidation.getFormObject(routines)};
 
