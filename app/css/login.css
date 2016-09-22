@@ -1,74 +1,29 @@
 
+
+img.center{
+   display: block;
+  margin: 0 auto 15px;
+  width: 70px;
+  height: 70px;"
+}
+/*The width of the gray login box*/
 .login-page {
   width: 300px;
-  padding: 8% 0 0;
+  padding: 20% 0 0; /*the position of the login box*/
   margin: auto;
 }
+
+/* The gray box */
 .loginForm {
   position: relative;
   z-index: 1;
   background: #E6E6E6;
   max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-}
-.loginForm input {
-  border: 2px solid red;
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #ffffff;
-  width: 100%;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-.loginForm button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #0052cc;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.loginForm button:hover,.loginForm button:active,.loginForm button:focus {
-  background: #003d99;
-}
-.loginForm .message {
-  margin: 15px 0 0;
-  color: #003d99;
-  font-size: 12px;
-}
-body {
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
-}
-
-body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
- 
-
- // CSS for login credentials 
-
- .login-page {
-  width: 300px;
-  padding: 8% 0 0;
   margin: auto;
-}
-.loginForm {
-  position: relative;
-  z-index: 1;
-  background: #E6E6E6;
-  max-width: 360px;
-  margin: 0 auto 100px;
   padding: 45px;
 }
+
+/* the input boxes  */
 .loginForm input {
   border: 1px solid black;
   font-family: "Roboto", sans-serif;
@@ -80,6 +35,7 @@ body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .loginForm button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -94,9 +50,17 @@ body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.loginForm p{
+  text-align: center;
+}
+
+/*Button hover*/
 .loginForm button:hover,.loginForm button:active,.loginForm button:focus {
   background: #003d99;
 }
+
+/*The font for the entire page*/
 .loginForm .message {
   margin: 15px 0 0;
   color: #003d99;
@@ -108,8 +72,7 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
 
-body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
-
+/*body{color:#000}*{display:border-box}input,option{text-transform:capitalize}*/
 
 /* The Modal (background) */
 .modal {
@@ -127,27 +90,29 @@ body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #FFFFFF;
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    height: 30%;
+    padding: 40px;
+    border: 1px solid #000000;
+    height: 250px;
+    width: 400px;
+    display: block;
+
 }
+
+/*Close button*/
 #close{
-  position: relative;
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #0052cc;
-  width: 80%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  /*-webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;*/
-  cursor: pointer;
+font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #0052cc;
+    width: 76%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    margin: auto;
+    display: block;
 }
 
 .submit:hover,
@@ -159,4 +124,8 @@ body{color:#000}*{display:border-box}input,option{text-transform:capitalize}
 
 .showModal{
   display: block !important;
+}
+
+.modal p{
+ text-align: center;
 }

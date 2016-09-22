@@ -97,15 +97,16 @@
 <div class="loginPage" data-ng-controller="loginController" class="container">
     <div class="loginPage" class="container">
         <div class="login-page container">
-                <div class="loginForm">     
-                    <p>Lorem ipsum dolor sit.
+                <div class="loginForm"> 
+                <img src="image/image.png" class="center">    
+                    <p><b>Lorem ipsum dolor sit.</b>
                  Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                     <form class="login-form">
-                      <label for="userName">Email</label>
+                      <label for="userName"><b>Email</b></label>
                       <input type="text" id="username" placeholder="xxxxxxxxxx" data-ng-model="userName"/>
-                      <label for="userName">Password</label>
+                      <label for="userName"><b>Password</b></label>
                       <input type="password" id="password" placeholder="xxxxxxxxxx" data-ng-model="password"/>
-                      <button data-ng-click="submit()">login</button>
+                      <button data-ng-click="submit()">log in</button>
                     </form>
                 </div>
         </div>
@@ -115,10 +116,12 @@
     <div id="myModal" class="modal" >
 
       <!-- Modal content -->
-      <div class="modal-content">   
-        <p>Uh oh. Something’s not right.</p>
-        <p>The email and/or password you entered is incorrect. Please try again or contact xxx@netpulse.com to reset your password.</p>
-        <input type="submit" value="Ok" id="close" data-ng-click="closeModal()">
+      <div class="modal-content"> 
+          <form class="close-form">  
+            <p><b>Uh oh. Something’s not right.</b></p>
+            <p>The email and/or password you entered is incorrect. Please try again or contact xxx@netpulse.com to reset your password.</p>
+            <input type="submit" value="Ok" id="close" data-ng-click="closeModal()">
+            </form>
       </div>
     </div>
 </div>
