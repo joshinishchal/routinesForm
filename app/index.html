@@ -12,40 +12,46 @@
 </head>
 <body>
 
-<div data-ng-controller="createNewRoutine" class="container" data-ng-show="false">
+<div data-ng-controller="createNewRoutine" class="container" data-ng-show="true">
 <header>
-    <p>Netpulse</p>
-    <p>Logout</p>
+     <div class="header">
+        <ul class="netpulseLogo"><b>Netpulse</b>
+        <a href="./routines/app/index.html" class="logoutButton">Logout</a>
+        </ul>
+    </div>
 </header>
 <section>
-        <header class="">
-            <p>Planet Fitness Admin. Setting up a routine is easy. Let's get started!</p>
-        </header>
+
+<header class="blueText"><b>Hello, Planet Fitness Admin. Setting up a routine is easy. Let's get started!</b></p>
+</header>
 
         <div class="form-group">
-            <label for="routineTitle">Routine Title<sup>*</sup></label>
+            <label for="routineTitle"><b>Routine Title</b><sup>*</sup></label>
             <input type="text" id="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="description">Description<sup>*</sup></label>
+            <label for="description"><b>Description</b><sup>*</sup></label>
             <textarea id="description"  data-ng-model="description" placeholder="Write here something about this routine." rows="4" cols="50" class="form-control"></textarea>
         </div>
 
         <div class="form-group">
-            <label>Unit of Measure<sup>*</sup></label>
+            <label><b>Unit of Measure</b><sup>*</sup></label>
             <div class="form-inline">
-                <input type="radio" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
+                <input type="checkbox" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
             <input class="form-control radio" type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
             </div>
         </div>
 
         <p>
-            <p class="pull-left">Exercises</p>
-            <button data-ng-click="addExercise" class="pull-right btn btn-success">ADD NEW EXERCISES</button>
+            <p class="pull-left"><b>Exercises</b></p>
+            <ul class="exercises">
+                <button data-ng-click="addExercise" class="pull-right btn btn-success">+</button>
+                <b>ADD NEW EXERCISE</b>
+            </ul>
         </p>
 
-        <div id="exercises">
+        <div id="exercises" style="background-color:#DCDCDC;border-radius:8px;padding:15px">
             <div class="form-group">
             <!--//Exercise Starts-->
                 <div class="exercise">
@@ -87,18 +93,18 @@
         </div>
         <footer>
             <p>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</p>
-            <button type="submit" data-ng-click="publish" class="btn btn-primary">Publish</button>
+            <button type="submit" data-ng-click="publish" class="btn btn-primary btn-publish">Publish</button>
         </footer>
 </section>
 <footer>
 </footer>
-</div> -->
+</div> 
 
 <div class="loginPage" data-ng-controller="loginController" class="container">
     <div class="loginPage" class="container">
         <div class="login-page container">
                 <div class="loginForm"> 
-                <img src="image/image.png" class="center">    
+                <img src="image/netpulse.png" class="center">    
                     <p><b>Lorem ipsum dolor sit.</b>
                  Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                     <form class="login-form">

@@ -1,7 +1,70 @@
 
+.header{
+    background-color: black;
+    height: 45px;
+}
 
+/* Netpulse logo */
+.netpulseLogo{
+  font-family: "Roboto", sans-serif;
+  color:white;
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+/* Logout button */
+.logoutButton{
+  font-family: "Roboto", sans-serif;
+  color:white;
+  float:right;
+  padding-right: 30px;
+  font-size: 15px;
+}
+
+/* The text in the blue field*/
+.blueText{
+    background-color: #4d88ff;
+    height: 45px;
+    padding-top: 10px;
+    text-align: center;
+    color:white;
+}
+
+/*Logout hover color change*/
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+/*Text input boxes*/
+.form-group {
+  margin: auto;
+  padding: 40px;
+}
+
+.btn-success{
+color: #fff;
+background-color: #000000;
+border-color: #000000;
+}
+
+/*The black plus button with the text*/
+.exercises{
+  float:right;
+}
+
+.btn-publish{
+    background-color: #4d88ff;
+    display:block;
+    margin: 0 auto;
+    border-radius: 0px;
+}
+
+
+/*--------------------------LOGIN CSS---------------------------*/
 img.center{
-   display: block;
+  display: block;
   margin: 0 auto 15px;
   width: 70px;
   height: 70px;"
