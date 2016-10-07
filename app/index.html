@@ -12,66 +12,69 @@
 </head>
 <body>
 
-<div data-ng-controller="createNewRoutine" class="container" data-ng-show="true">
+<div data-ng-controller="createNewRoutine" class="container-fluid" data-ng-show="true">
 <header>
      <div class="header">
         <ul class="netpulseLogo"><b>Netpulse</b>
-        <a href="./routines/app/index.html" class="logoutButton">Logout</a>
+        <a href="./routines/app/index.html" class="logoutButton"><i class="fa fa-user" aria-hidden="true"></i>Logout</a>
         </ul>
     </div>
 </header>
 <section>
 
-<header class="blueText"><b>Hello, Planet Fitness Admin. Setting up a routine is easy. Let's get started!</b></p>
-</header>
 
-        <div class="form-group">
+<div class="blueText"><b>Hello, Planet Fitness Admin. Setting up a routine is easy. Let's get started!</b></p>
+</div>
+
+        <div class="form-group center">
             <label for="routineTitle"><b>Routine Title</b><sup>*</sup></label>
             <input type="text" id="routineTitle" data-ng-model="routineTitle" placeholder="Calories Burn Fridays" class="form-control">
         </div>
 
-        <div class="form-group">
+        <div class="form-group center">
             <label for="description"><b>Description</b><sup>*</sup></label>
             <textarea id="description"  data-ng-model="description" placeholder="Write here something about this routine." rows="4" cols="50" class="form-control"></textarea>
         </div>
 
-        <div class="form-group">
+        <div class="form-group center">
             <label><b>Unit of Measure</b><sup>*</sup></label>
             <div class="form-inline">
                 <input type="checkbox" class="form-control radio" name="unit" value="imperial" data-ng-model="unit" checked="checked" data-ng-init="unit='imperial'"> Imperial
-            <input class="form-control radio" type="radio" name="unit" value="metric" data-ng-model="unit"> Metric
+            <input class="form-control radio" type="checkbox" name="unit" value="metric" data-ng-model="unit"> Metric
             </div>
         </div>
-
+        <hr> <!--horizontal line-->
         <p>
             <p class="pull-left"><b>Exercises</b></p>
             <ul class="exercises">
-                <button data-ng-click="addExercise" class="pull-right btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                <b>ADD NEW EXERCISE</b>
+                <a href="./routines/app/index.html" class="addExersise">
+                    <i class="fa fa-plus-square plus fa-lg" aria-hidden="true"></i>
+                    <b>ADD NEW EXERCISE</b> 
+                </a>
             </ul>
         </p>
 
-        <div id="exercises" style="background-color:#DCDCDC;border-radius:8px;padding:15px">
+        <div>
             <div class="form-group">
             <!--//Exercise Starts-->
                 <div class="exercise">
                     <!--//First line of form starts here-->
                     <div class="form-inline">
                         <div class="input-group exerciseSelector">
-                            <input type="text" class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType">
-                            <input type="text" class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
-                            <input type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}" npsettype={{selectedSetType}} npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
+                            <input class="exerciseInput" type="text" class="input-group" name="exerciseType" id="exerciseType" list="exerciseTypes" placeholder="Select Type" data-ng-model="selectedExerciseType">
+                            <input class="exerciseInput" type="text" class="input-group" name="exerciseName" id="exerciseName" list="exerciseNames" placeholder="Exercise Name" data-ng-model="selectedExerciseName" npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
+                            <input class="exerciseinput" type="text" class="input-group" name="setType" id="setType" list="setTypes" placeholder="Select Set Type" data-ng-model="selectedSetType" data-ng-show="isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)" required="{{isSetTypeVisible(selectedExerciseType.toLowerCase(), selectedExerciseName)}}" npsettype={{selectedSetType}} npcardioset={{getDurationDistanceVisibility(selectedExerciseType.toLowerCase(),selectedExerciseName,selectedSetType)}}>
                         </div>
-                        <div class="input-group cardioContainer">
+                            <div class="input-group cardioContainer">
                         </div>
                         <div class="input-group">
                             <label for="restTime" class="sr-only">Rest Time (Optional)</label>
                             <span class="input-group-addon">Rest Time(Optional)</span>
-                            <input type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
+                            <input class="exerciseInput" type="text" class="input-group" name="restTime" id="restTime" placeholder="Rest Time">
                             <span class="input-group-addon">MM:SS</span>
                         </div>
-                        <div class="input-group">
-                            <button class="input-group" type="button" id="deleteExercise" name="deleteExercise">Delete</button>
+                        <div class="input-group vertical">
+                            <a href="#" id="deleteExercise" name="deleteExercise"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a> 
                         </div>
                         <datalist id="exerciseTypes">
                             <option data-ng-repeat="(exerciseType, exercise) in fbExerciseData['exerciseType']" data-value="{{fbExerciseData['exerciseCategories'][exerciseType]['name']}}">{{fbExerciseData['exerciseCategories'][exerciseType]['name']}}</option>
@@ -91,8 +94,9 @@
                 <!--//Exercise Ends-->
             </div>
         </div>
+        <p style="color:#4d88ff">Don't see an exercises listed? Contact [xxxxxx]</p>
         <footer>
-            <p>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</p>
+            <p class="footer"><b>Please review your routine details. When this information is submitted. It will be available to all members in app immediately.</b></p>
             <button type="submit" data-ng-click="publish" class="btn btn-primary btn-publish">Publish</button>
         </footer>
 </section>

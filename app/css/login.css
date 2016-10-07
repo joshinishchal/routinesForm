@@ -2,7 +2,7 @@
 .header{
     background-color: black;
     height: 45px;
-}
+  }
 
 /* Netpulse logo */
 .netpulseLogo{
@@ -32,15 +32,26 @@
 
 /*Logout hover color change*/
 a:hover {
-    color: red;
+    color: #1a3e77;
     background-color: transparent;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /*Text input boxes*/
 .form-group {
   margin: auto;
   padding: 40px;
+}
+
+.center{
+  width: 75%;
+}
+
+/*Text input boxes*/
+.form-control {
+  border: 2px solid black;
+  border-radius: 0;
+
 }
 
 .btn-success{
@@ -54,13 +65,61 @@ border-color: #000000;
   float:right;
 }
 
+.exerciseInput{
+  padding: .375rem .75rem;
+}
+
 .btn-publish{
-    background-color: #4d88ff;
+    background-color: #1552b5;
+    border-color: #1552b5;
     display:block;
     margin: 0 auto;
     border-radius: 0px;
+    width:15%; /*width of the Publish button*/
 }
 
+/*Plus icon*/
+.plus{
+  color:black;
+}
+
+i:hover{
+  color: #0f2444;
+}
+
+/*Trashcan icon*/
+.fa-trash-o{
+  color: #3d4044;
+  float: right;
+}
+
+.addExersise{
+  color:black;
+}
+
+/*Gray box*/
+.exercise{
+  background-color:#DCDCDC;
+  border-radius:0px;
+  padding:15px;
+}
+
+/*Footer text*/
+.footer{
+  text-align: center;
+}
+
+/*The exercise input boxes*/
+.exerciseInput{
+    float: left;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+/*vertical line
+.vertical{
+  border-left: solid white;
+}*/
 
 /*--------------------------LOGIN CSS---------------------------*/
 img.center{
