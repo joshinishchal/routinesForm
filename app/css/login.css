@@ -32,7 +32,7 @@
 
 /*Logout hover color change*/
 a:hover {
-    color: #1a3e77;
+    color: 8F95A1;
     background-color: transparent;
     text-decoration: none;
 }
@@ -79,13 +79,10 @@ border-color: #000000;
 }
 
 /*Plus icon*/
-.plus{
+.addExersise{
   color:black;
 }
 
-i:hover{
-  color: #0f2444;
-}
 
 /*Trashcan icon*/
 .fa-trash-o{
@@ -94,7 +91,8 @@ i:hover{
 }
 
 .addExersise{
-  color:black;
+  float:right;
+  padding-right: 30px;
 }
 
 /*Gray box*/
